@@ -12,7 +12,10 @@
   "dependencies": {
     "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "yup": "^1.7.0",
+    "yup-locales": "^1.2.28"
   },
   "type": "module"
 }
