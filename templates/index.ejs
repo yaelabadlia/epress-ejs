@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page d'accueil</title>
+</head>
+
+<body>
+  <h1>Page d'accueil</h1>
+  <p>Express.js + EJS </p>
+  <h2>Affichage</h2>
+  <p>
+    Bonjour <%= nom %>
+  </p>
+  <p>
+    Bonjour <%= nomImportant %>
+  </p>
+  <p>
+    Bonjour <%- nomImportant %>
+  </p>
+  <h2>Structures de contrôle</h2>
+  <h3>Structures conditionnelles</h3>
+  <% if (isConnected) { %>
+  <p>Vous êtes connecté</p>
+  <%} else{ %>
+  <p>Vous n'êtes pas connecté</p>
+  <% } %>
+  <h3>Structures itératives</h3>
+  <ul>
+    <% for( const elt of nombres) { %>
+    <li>
+      <%= elt %>
+    </li>
+    <%}%>
+  </ul>
+  <ul>
+    <% for( const elt of nombres) { %>
+    <li>
+      <%= elt %>
+      <% if (elt % 2 == 0) {%>
+      pair
+      <% } else { %>
+      impair
+      <% } %>
+    </li>
+    <%}%>
+  </ul>
+  <ul>
+    <% nombres.forEach(elt => { %>
+    <li>
+      <% let parity = elt % 2 == 0 ? 'pair' : 'impair' %>
+      <%= `${elt} : ${parity}` %> </li>
+    <% }) %>
+  </ul>
+
+  <%- include('footer.ejs', {year: 2025}) %>
+</body>
+
+</html>
