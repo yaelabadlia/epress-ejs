@@ -40,7 +40,7 @@ const showPersonnes = async (req, res, next) => {
 
     }
 }
-const addPersonne = (req, res, next) => {
+const add= (req, res, next) => {
 
     personneSchema
         .validate(req.body, { abortEarly: false })
