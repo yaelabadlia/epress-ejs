@@ -1,7 +1,10 @@
 import * as yup from 'yup'
 import { fr } from 'yup-locales'
+import connection from '../config/db.js'
 
 yup.setLocale(fr)
+
+
 
 const personneSchema = yup.object().shape({
     nom: yup
@@ -20,16 +23,22 @@ const personneSchema = yup.object().shape({
 })
 
 
-const personnes = [
-    { id: 1, nom: "Wick", prenom: "John", age: 45 },
-    { id: 2, nom: "Dalton", prenom: "Jack", age: 55 },
-    { id: 3, nom: "Maggio", prenom: "Sophie", age: 33 },
-]
+// const personnes = [
+//     { id: 1, nom: "Wick", prenom: "John", age: 45 },
+//     { id: 2, nom: "Dalton", prenom: "Jack", age: 55 },
+//     { id: 3, nom: "Maggio", prenom: "Sophie", age: 33 },
+// ]
 
 const showPersonnes = (req, res, next) => {
-    res.render('personne', {
-        personnes,
-        erreurs: null
+    const SELECT = "SELECT * FROM personnes"
+    const query = connection.query(SELECT, (error, resultat) => {
+        console.log(query.sql);
+        if (resultat) {
+            res.render('personne', {
+                personnes: resultat,
+                erreurs: null
+            })
+        }
     })
 }
 const addPersonne = (req, res, next) => {
@@ -37,8 +46,18 @@ const addPersonne = (req, res, next) => {
     personneSchema
         .validate(req.body, { abortEarly: false })
         .then(() => {
-            personnes.push(req.body)
             req.session.firstname = req.body.prenom
+            const INSERT = "INSERT INTO personnes values (null, ?, ?, ?)"
+            const query = connection.query(INSERT, [req.body.nom, req.body.prenom, req.body.age], (error, resultat) => {
+                console.log(query.sql);
+                if (resultat.affectedRows == 0) {
+
+                    // res.render('personne', {
+                    //     personnes: resultat,
+                    //     erreurs: null
+                    // })
+                }
+            })
             res.redirect('/personne')
         })
         .catch(err => {
@@ -55,12 +74,20 @@ const addPersonne = (req, res, next) => {
 }
 const deletePersonne = (req, res, next) => {
     const id = req.params.id
-    const index = personnes.findIndex(p => p.id == id)
-    if (index != -1) {
-        personnes.splice(index, 1)
-    } else {
-        alert("Suppression impossible !")
-    }
+    const DELETE = "DELETE FROM personnes WHERE id=?"
+    const query = connection.query(DELETE, id, (error, resultat) => {
+        console.log(query.sql);
+        console.log(resultat);
+
+        if (resultat.affectedRows == 0) {
+
+            // res.render('personne', {
+            //     personnes: resultat,
+            //     erreurs: null
+            // })
+        }
+    })
+
     res.redirect('/personne')
 
 }

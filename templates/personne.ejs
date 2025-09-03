@@ -11,13 +11,8 @@
   <h1>Gestion de personnes</h1>
   <h2>Ajouter une nouvelle personne</h2>
   <ul>
-    <% if (erreurs) { %>
-    <%  erreurs.forEach(err => { %>
-    <li>
-      <%= err %>
-    </li>
-
-    <% }) %>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <li style="color:red;"><%= error %></li>
     <% } %>
   </ul>
   <form action="/personne" method="post">
@@ -44,8 +39,10 @@
     <% personnes.forEach(p => { %>
     <% let link=`/personne/${p.id}` %>
     <li>
-      <%= `${p.prenom} ${p.nom}` %>
-      <a href="<%= link %>">supprimer</a>
+      <%= `${p.prenom} ${p.nom}` %> - <%= p.age %> ans
+      <form action="/personne/<%= p.id %>" method="get" style="display:inline;margin-left:8px">
+        <button type="submit">Supprimer</button>
+      </form>
     </li>
     <%})%>
   </ul>
