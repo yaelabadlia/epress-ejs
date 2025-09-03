@@ -1,65 +1,67 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!-- ...existing code... -->
+<!DOCTYPE html> <!-- indique le type de document HTML -->
+<html lang="fr"> <!-- langue du document : français -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page d'accueil</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
+<head> <!-- début de l'en-tête -->
+  <meta charset="UTF-8"> <!-- encodage des caractères -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- rendu responsive -->
+  <title>Page d'accueil</title> <!-- titre affiché dans l'onglet -->
+  <link rel="stylesheet" href="css/style.css"> <!-- inclusion du fichier CSS -->
+</head> <!-- fin de l'en-tête -->
 
-<body>
-  <h1>Page d'accueil</h1>
-  <p>Express.js + EJS </p>
-  <h2>Affichage</h2>
+<body> <!-- début du corps de la page -->
+  <h1>Page d'accueil</h1> <!-- titre principal -->
+  <p>Express.js + EJS </p> <!-- description courte -->
+  <h2>Affichage</h2> <!-- section affichage -->
   <p>
-    Bonjour <%= nom %>
+    Bonjour <%= nom %> <!-- affiche la variable 'nom' échappée -->
   </p>
   <p>
-    Bonjour <%= nomImportant %>
+    Bonjour <%= nomImportant %> <!-- affiche 'nomImportant' échappé -->
   </p>
   <p>
-    Bonjour <%- nomImportant %>
+    Bonjour <%- nomImportant %> <!-- affiche 'nomImportant' non échappé (HTML possible) -->
   </p>
-  <h2>Structures de contrôle</h2>
+  <h2>Structures de contrôle</h2> <!-- section pour les contrôles -->
   <h3>Structures conditionnelles</h3>
-  <% if (isConnected) { %>
-  <p>Vous êtes connecté</p>
-  <%} else{ %>
-  <p>Vous n'êtes pas connecté</p>
-  <% } %>
+  <% if (isConnected) { %> <!-- condition : si connecté -->
+  <p>Vous êtes connecté</p> <!-- message si vrai -->
+  <%} else{ %> <!-- sinon -->
+  <p>Vous n'êtes pas connecté</p> <!-- message si faux -->
+  <% } %> <!-- fin du if -->
   <h3>Structures itératives</h3>
   <ul>
-    <% for( const elt of nombres) { %>
+    <% for( const elt of nombres) { %> <!-- boucle for...of sur 'nombres' -->
     <li>
-      <%= elt %>
+      <%= elt %> <!-- affiche chaque élément -->
     </li>
-    <%}%>
+    <%}%> <!-- fin de la boucle -->
   </ul>
   <ul>
-    <% for( const elt of nombres) { %>
+    <% for( const elt of nombres) { %> <!-- autre exemple de boucle -->
     <li>
       <%= elt %>
-      <% if (elt % 2 == 0) {%>
+      <% if (elt % 2 == 0) {%> <!-- condition pour la parité -->
       pair
       <% } else { %>
       impair
-      <% } %>
+      <% } %> <!-- fin du if interne -->
     </li>
-    <%}%>
+    <%}%> <!-- fin de la boucle -->
   </ul>
   <ul>
-    <% nombres.forEach(elt => { %>
+    <% nombres.forEach(elt => { %> <!-- utilisation de forEach sur 'nombres' -->
     <li>
-      <% let parity = elt % 2 == 0 ? 'pair' : 'impair' %>
-      <%= `${elt} : ${parity}` %> </li>
-    <% }) %>
+      <% let parity = elt % 2 == 0 ? 'pair' : 'impair' %> <!-- calcul rapide de la parité -->
+      <%= `${elt} : ${parity}` %> </li> <!-- affiche l'élément et sa parité -->
+    <% }) %> <!-- fin du forEach -->
   </ul>
-  <h2>Sesssion</h2>
+  <h2>Sesssion</h2> <!-- section session -->
   <p>
-    <%= firstname %>
+    <%= firstname %> <!-- affiche 'firstname' depuis la session -->
   </p>
-  <%- include('footer.ejs', {year: 2025}) %>
+  <%- include('footer.ejs', {year: 2025}) %> <!-- inclusion partielle du footer en passant une variable -->
 </body>
 
 </html>
+<!-- ...existing code... -->

@@ -1,51 +1,53 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!-- ...existing code... -->
+<!DOCTYPE html> <!-- type de document -->
+<html lang="fr"> <!-- langue française -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personne</title>
+<head> <!-- en-tête -->
+  <meta charset="UTF-8"> <!-- encodage -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsive -->
+  <title>Personne</title> <!-- titre de la page -->
 </head>
 
-<body>
-  <h1>Gestion de personnes</h1>
-  <h2>Ajouter une nouvelle personne</h2>
-  <ul>
-    <% if (typeof error !== 'undefined' && error) { %>
-      <li style="color:red;"><%= error %></li>
-    <% } %>
+<body> <!-- début contenu -->
+  <h1>Gestion de personnes</h1> <!-- titre principal -->
+  <h2>Ajouter une nouvelle personne</h2> <!-- sous-titre pour le formulaire -->
+  <ul> <!-- liste pour afficher les erreurs -->
+    <% if (typeof error !== 'undefined' && error) { %> <!-- vérifie si 'error' existe et n'est pas vide -->
+      <li style="color:red;"><%= error %></li> <!-- affiche le message d'erreur en rouge -->
+    <% } %> <!-- fin de la condition -->
   </ul>
-  <form action="/personne" method="post">
+  <form action="/personne" method="post"> <!-- formulaire POST vers /personne -->
     <div>
-      <label for="nom">Nom</label>
-      <input type="text" id="nom" name="nom">
+      <label for="nom">Nom</label> <!-- étiquette pour le nom -->
+      <input type="text" id="nom" name="nom"> <!-- champ de saisie pour le nom -->
     </div>
     <div>
-      <label for="prenom">Prénom</label>
-      <input type="text" id="prenom" name="prenom">
+      <label for="prenom">Prénom</label> <!-- étiquette pour le prénom -->
+      <input type="text" id="prenom" name="prenom"> <!-- champ de saisie pour le prénom -->
     </div>
     <div>
-      <label for="age">Âge</label>
-      <input type="number" id="age" name="age">
+      <label for="age">Âge</label> <!-- étiquette pour l'âge -->
+      <input type="number" id="age" name="age"> <!-- champ numérique pour l'âge -->
     </div>
     <div>
-      <button>
+      <button> <!-- bouton d'envoi -->
         Envoyer
       </button>
     </div>
   </form>
-  <h2>Liste des personnes</h2>
-  <ul>
-    <% personnes.forEach(p => { %>
-    <% let link=`/personne/${p.id}` %>
-    <li>
-      <%= `${p.prenom} ${p.nom}` %> - <%= p.age %> ans
-      <form action="/personne/<%= p.id %>" method="get" style="display:inline;margin-left:8px">
-        <button type="submit">Supprimer</button>
+  <h2>Liste des personnes</h2> <!-- sous-titre pour la liste -->
+  <ul> <!-- liste des personnes -->
+    <% personnes.forEach(p => { %> <!-- boucle sur le tableau 'personnes' -->
+    <% let link=`/personne/${p.id}` %> <!-- prépare un lien vers chaque personne -->
+    <li> <!-- élément de liste par personne -->
+      <%= `${p.prenom} ${p.nom}` %> - <%= p.age %> ans <!-- affiche prénom, nom et âge -->
+      <form action="/personne/<%= p.id %>" method="get" style="display:inline;margin-left:8px"> <!-- formulaire pour supprimer (GET ici) -->
+        <button type="submit">Supprimer</button> <!-- bouton supprimer -->
       </form>
     </li>
-    <%})%>
+    <%})%> <!-- fin de la boucle forEach -->
   </ul>
 </body>
 
 </html>
+<!-- ...existing code... -->
